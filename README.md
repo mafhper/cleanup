@@ -1,6 +1,3 @@
-
-
-```markdown
 # Script de Manutenção e Limpeza do Sistema Ubuntu (manutencao_ubuntu.sh)
 
 Este script Bash foi criado para automatizar tarefas comuns de manutenção e limpeza em sistemas Ubuntu. Ele oferece um menu interativo no terminal para que você possa selecionar quais tarefas deseja executar, agrupadas por categorias.
@@ -68,7 +65,7 @@ sudo mv manutencao_ubuntu.sh /usr/local/bin/manutencao
 
 Ao executar o script, um menu interativo será exibido no terminal.
 
-```
+
 =======================================================
 MENU DE MANUTENÇÃO DO SISTEMA - AGRUPADO
 =======================================================
@@ -87,7 +84,7 @@ Selecione as categorias desejadas digitando os números separados por espaço:
 0 - Sair sem executar nenhuma manutenção
 
 Categorias selecionadas (ex: 1 2 ou 5 para tudo, 0 para sair):
-```
+
 
 Digite os números das categorias que deseja executar, separados por espaços (ex: `1 2 3`).
 
