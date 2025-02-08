@@ -61,7 +61,7 @@ sudo ./manutencao_ubuntu.sh
 **Se você moveu o script para um diretório em seu `PATH` (como `/usr/local/bin` - veja abaixo), você pode executá-lo globalmente:**
 
 ```bash
-sudo manutencao_ubuntu.sh
+sudo mv manutencao_ubuntu.sh /usr/local/bin/manutencao
 ```
 
 ### 4. Menu Interativo
