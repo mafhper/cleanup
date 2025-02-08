@@ -1,157 +1,109 @@
-# Script de Manutenção e Limpeza do Sistema Ubuntu (manutencao_ubuntu.sh)
+# Script de Manutenção do Sistema Ubuntu (cleanup.sh)
 
-Este script Bash foi criado para automatizar tarefas comuns de manutenção e limpeza em sistemas Ubuntu. Ele oferece um menu interativo no terminal para que você possa selecionar quais tarefas deseja executar, agrupadas por categorias.
+[![Licença MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Funcionalidades
+Este script Bash abrangente foi projetado para simplificar a manutenção e limpeza de sistemas Ubuntu, oferecendo uma interface interativa e funcionalidades robustas para manter seu sistema otimizado.
 
-O script permite realizar as seguintes tarefas de manutenção, agrupadas em categorias:
+## Funcionalidades Principais
 
-1.  **Tarefas de Atualização do Sistema:**
-    *   Atualiza a lista de pacotes disponíveis nos repositórios (`apt update`).
-    *   Atualiza os pacotes instalados para as versões mais recentes (`apt upgrade`).
-
-2.  **Tarefas de Limpeza de Cache:**
-    *   Limpa o cache do APT, removendo pacotes desnecessários e arquivos de pacotes antigos (`apt autoremove`, `apt autoclean`, `apt clean`).
-    *   Limpa arquivos temporários antigos nos diretórios `/tmp` e `/var/tmp`.
-    *   Limpa o cache de navegadores web (Firefox, Chrome/Chromium) do perfil do usuário que executa o script (opcional, configurável).
-    *   Limpa o cache de miniaturas de imagens em `~/.cache/thumbnails/`.
-
-3.  **Tarefas de Limpeza de Logs:**
-    *   Remove arquivos de log antigos do diretório `/var/log` (logs com mais de 30 dias por padrão, configurável).
-
-4.  **Verificação de Espaço em Disco:**
-    *   Exibe o uso do espaço em disco usando o comando `df -h`, com os resultados detalhados registrados no arquivo de log.
-
-5.  **Executar TODAS as Tarefas:**
-    *   Permite executar todas as categorias de tarefas de manutenção em sequência.
-
-## Pré-requisitos
-
-*   Sistema operacional Ubuntu (ou similar baseado em Debian, compatível com `apt`).
-*   Privilégios de administrador (necessário para executar a maioria das tarefas de manutenção). O script verifica se está sendo executado com `sudo`.
+* **Menu Interativo Agrupado:** Navegue facilmente pelas opções de manutenção através de um menu interativo e organizado por categorias.
+* **Saída Verbosa e Colorida:** Receba feedback detalhado sobre cada etapa da manutenção com mensagens coloridas para melhor visualização e acompanhamento.
+* **Resumo Detalhado da Execução:** Ao final da manutenção, visualize um resumo conciso no terminal, incluindo:
+    * Período de execução do script.
+    * Métricas de espaço liberado e pacotes baixados (quando aplicável).
+    * Lista de tarefas de manutenção executadas.
+    * Referência ao arquivo de log para detalhes completos.
+* **Métricas de Limpeza:** Acompanhe o espaço em disco liberado pelas tarefas de limpeza e o volume de dados baixados durante as atualizações do sistema.
+* **Limpeza Abrangente:** Inclui as seguintes tarefas de manutenção:
+    * Atualização de pacotes do sistema (`apt update` e `apt upgrade`).
+    * Limpeza do APT (`autoremove`, `autoclean`, `clean`).
+    * Limpeza de arquivos temporários em `/tmp` e `/var/tmp` (configurável por idade).
+    * Limpeza de logs antigos em `/var/log` (configurável por idade).
+    * Limpeza de cache de navegadores (Firefox, Chrome/Chromium) - opcional e configurável.
+    * Limpeza de cache de miniaturas (`~/.cache/thumbnails`).
+    * Verificação do espaço em disco (`df -h`).
+* **Arquivo de Log Detalhado:** Todas as ações e saídas do script são registradas em `/var/log/manutencao_ubuntu.log` para auditoria e referência futura.
+* **Configurações Personalizáveis:** Ajuste variáveis no início do script para personalizar o comportamento, como:
+    * Dias limite para arquivos temporários e logs.
+    * Habilitar/desabilitar limpeza de cache de navegadores.
 
 ## Como Usar
 
-### 1. Salvar o script
+1.  **Baixe o script:**
+    Você pode baixar o script `cleanup.sh` diretamente do seu repositório GitHub ou usando `wget`:
 
-1.  Obtenha o script `manutencao_ubuntu.sh` (fornecido separadamente).
-2.  Salve o arquivo com o nome `manutencao_ubuntu.sh` em um local de sua escolha no seu sistema Ubuntu (por exemplo, na sua pasta pessoal, ou em `/usr/local/bin` para acesso global - veja abaixo).
+    \`\`\`bash
+    wget [URL_DIRETO_PARA_O_ARQUIVO_CLEANUP.SH] -O cleanup.sh
+    \`\`\`
 
-### 2. Tornar o script executável
+    *(Substitua `[URL_DIRETO_PARA_O_ARQUIVO_CLEANUP.SH]` pelo link direto para o arquivo `cleanup.sh` no seu repositório GitHub)*
 
-Para executar o script, ele precisa ter permissão de execução. Abra o terminal e navegue até o diretório onde você salvou o arquivo `manutencao_ubuntu.sh`. Execute o seguinte comando para dar permissão de execução:
+2.  **Torne o script executável:**
+    Dê permissão de execução para o script:
 
-```bash
-chmod +x manutencao_ubuntu.sh
-```
+    \`\`\`bash
+    chmod +x cleanup.sh
+    \`\`\`
 
-### 3. Executar o script pelo terminal
+3.  **Execute o script como root:**
+    O script requer privilégios de root para executar todas as tarefas de manutenção. Execute-o com `sudo`:
 
-Para executar o script, utilize o comando `sudo` seguido do caminho para o script, pois ele requer privilégios de administrador.
+    \`\`\`bash
+    sudo ./cleanup.sh
+    \`\`\`
 
-**Se o script estiver no diretório atual:**
+    Ou, se você moveu o script para um diretório em seu PATH, como `/usr/local/bin`:
 
-```bash
-sudo ./manutencao_ubuntu.sh
-```
+    \`\`\`bash
+    sudo cleanup.sh
+    \`\`\`
 
-**Se você moveu o script para um diretório em seu `PATH` (como `/usr/local/bin` - veja abaixo), você pode executá-lo globalmente:**
+4.  **Siga o menu interativo:**
+    O script exibirá um menu no terminal. Selecione as opções de manutenção desejadas digitando os números correspondentes separados por espaços e pressione `Enter`. Para executar todas as tarefas, selecione a opção `5`. Para sair sem executar nenhuma manutenção, selecione `0`.
 
-```bash
-sudo mv manutencao_ubuntu.sh /usr/local/bin/manutencao
-```
+5.  **Analise o Resumo:**
+    Após a execução, um resumo das tarefas realizadas, métricas e período de execução será exibido no terminal.
 
-### 4. Menu Interativo
+6.  **Consulte o Log Detalhado:**
+    Para um registro completo de todas as ações, verifique o arquivo de log em `/var/log/manutencao_ubuntu.log`.
 
-Ao executar o script, um menu interativo será exibido no terminal.
+## Configuração
 
+As seguintes variáveis podem ser configuradas no início do script para personalizar seu comportamento:
 
-=======================================================
-MENU DE MANUTENÇÃO DO SISTEMA - AGRUPADO
-=======================================================
+* `LOG_FILE="/var/log/manutencao_ubuntu.log"`:  Define o caminho e nome do arquivo de log.
+* `TEMP_THRESHOLD_DAYS=3`: Define o número de dias de idade para arquivos temporários em `/tmp` e `/var/tmp` serem considerados para limpeza.
+* `CACHE_THRESHOLD_DAYS=7`:  *(Atualmente não utilizado diretamente, mas pode ser usado para futuras implementações de limpeza de cache baseada em idade)*
+* `LOG_THRESHOLD_DAYS=30`: Define o número de dias de idade para arquivos de log em `/var/log` serem considerados para limpeza.
+* `CACHE_NAVEGADOR=true`:  Define se a limpeza de cache dos navegadores (Firefox e Chrome/Chromium) deve ser habilitada por padrão (`true`) ou desabilitada (`false`).
 
-Selecione as categorias desejadas digitando os números separados por espaço:
+## Métricas e Resumo
 
-1 - Tarefas de Atualização do Sistema
-    (Atualizar lista de pacotes e pacotes instalados)
-2 - Tarefas de Limpeza de Cache
-    (APT, Temporários, Navegadores, Miniaturas)
-3 - Tarefas de Limpeza de Logs
-    (Arquivos de log antigos)
-4 - Verificação de Espaço em Disco
-    (Exibir uso do disco)
-5 - Executar TODAS as Tarefas de Manutenção (1, 2, 3 e 4)
-0 - Sair sem executar nenhuma manutenção
+O script fornece um resumo ao final da execução, exibindo:
 
-Categorias selecionadas (ex: 1 2 ou 5 para tudo, 0 para sair):
+* **Período de Execução:** Tempo total que o script levou para ser executado.
+* **Métricas de Manutenção:**
+    * Pacotes Atualizados/Baixados: Quantidade de dados baixados durante a atualização de pacotes (em MB).
+    * Espaço Total Liberado: Espaço total em disco liberado pelas tarefas de limpeza (em MB).
+* **Tarefas Executadas:** Lista das tarefas de manutenção que foram selecionadas e executadas.
+* **Status do Disco:**  Um lembrete para verificar o arquivo de log para detalhes completos sobre o status do disco (saída do comando `df -h`).
 
+## Arquivo de Log
 
-Digite os números das categorias que deseja executar, separados por espaços (ex: `1 2 3`).
+Um log detalhado de todas as operações é gravado em `/var/log/manutencao_ubuntu.log`. Este arquivo contém timestamps, mensagens informativas, erros (se ocorrerem) e a saída completa de comandos como `apt update`, `apt upgrade` e `df -h`.
 
-*   Para executar todas as tarefas, digite `5`.
-*   Para sair sem executar nenhuma tarefa, digite `0`.
-*   Pressione Enter para confirmar sua seleção.
+## Dependências
 
-O script então executará as tarefas selecionadas, exibindo mensagens de progresso coloridas no terminal.
+* **Bash:** O script é escrito em Bash e requer um interpretador Bash para ser executado.
+* **Ubuntu ou sistemas baseados em Debian:**  O script foi desenvolvido e testado em sistemas Ubuntu. Pode funcionar em outras distribuições baseadas em Debian, mas a compatibilidade total não é garantida. Depende de utilitários padrão como `apt`, `find`, `rm`, `df`, `du`, `grep`, `awk`, `sed`, e `bc`.
+* **Privilégios de Root:**  É necessário executar o script com `sudo` pois muitas tarefas de manutenção exigem privilégios administrativos.
 
-### 5. Arquivo de Log
+## Avisos Importantes
 
-Os detalhes de cada execução do script, incluindo mensagens de log e a saída dos comandos, são registrados no arquivo:
+* **Execute com cautela:**  Este script executa comandos que podem modificar seu sistema. **Revise o código cuidadosamente** antes de executar e certifique-se de entender o que cada tarefa faz.
+* **Backup Recomendado:**  É sempre recomendável fazer backup de dados importantes antes de executar scripts de manutenção do sistema, especialmente em ambientes de produção.
+* **Responsabilidade:** O uso deste script é por sua conta e risco. O autor não se responsabiliza por quaisquer problemas que possam ocorrer devido ao uso incorreto ou falhas no script.
 
-`/var/log/manutencao_ubuntu.log`
+## Licença
 
-Você pode verificar este arquivo para acompanhar o que foi feito e se houve algum problema.
-
-## Como tornar o script executável globalmente pelo Bash
-
-Para executar o script de qualquer diretório no terminal, sem precisar especificar o caminho completo, você pode torná-lo "globalmente executável" seguindo estes passos:
-
-1.  **Mova o script para um diretório no seu `PATH`:**
-    Diretórios como `/usr/local/bin` e `/usr/bin` já estão incluídos na variável de ambiente `PATH` do sistema. É recomendável usar `/usr/local/bin` para scripts locais.
-
-    Use o comando `sudo mv` para mover o arquivo `manutencao_ubuntu.sh` para `/usr/local/bin`:
-
-```bash
-sudo mv manutencao_ubuntu.sh /usr/local/bin/
-```
-
-2.  **Verifique se está no `PATH` (opcional):**
-    Você pode verificar se `/usr/local/bin` está no seu `PATH` executando:
-
-```bash
-echo $PATH
-```
-
-    A saída deve listar `/usr/local/bin` entre os diretórios separados por `:`.
-
-Agora, após mover e tornar o script executável (passo 2 em "Como Usar"), você pode executá-lo de qualquer diretório no terminal simplesmente digitando:
-
-```bash
-sudo manutencao_ubuntu.sh
-```
-
-## Configurações e Personalização
-
-As seguintes configurações podem ser personalizadas no início do script `manutencao_ubuntu.sh`:
-
-*   `LOG_FILE="/var/log/manutencao_ubuntu.log"`: Caminho do arquivo de log.
-*   `TEMP_THRESHOLD_DAYS=3`: Número de dias para considerar arquivos temporários como "antigos" e elegíveis para limpeza.
-*   `CACHE_THRESHOLD_DAYS=7`: Número de dias para considerar pacotes em cache do APT como "antigos".
-*   `LOG_THRESHOLD_DAYS=30`: Número de dias para considerar arquivos de log como "antigos" e elegíveis para limpeza.
-*   `CACHE_NAVEGADOR=true`: Define se a limpeza do cache de navegadores está ativada por padrão (`true`) ou desativada (`false`). Esta opção pode ser alterada diretamente no script.
-
-Você pode editar o script com um editor de texto para ajustar essas configurações conforme suas necessidades.
-
-## Advertências e Boas Práticas
-
-*   **Execute com cuidado:**  Este script executa operações de sistema que podem afetar seu sistema. Leia e entenda o script antes de executá-lo.
-*   **Teste em ambiente de teste:**  Se você fizer alterações no script, especialmente nas partes de limpeza, é altamente recomendável testá-lo em um sistema Ubuntu de teste (máquina virtual) antes de usar no seu sistema principal.
-*   **Cuidado com a limpeza de logs e cache:**  Pondere sobre a necessidade de limpar logs e cache, e ajuste os limiares de tempo e opções conforme necessário. Logs podem ser importantes para diagnóstico, e limpar cache de navegadores pode afetar temporariamente o desempenho de navegação.
-*   **Backup:**  Antes de executar qualquer script de manutenção, especialmente se você estiver fazendo alterações significativas, é sempre uma boa prática fazer backup de dados importantes.
-
-## Versão
-
-1.0
-
----
-```
+Este script é distribuído sob a [Licença MIT](https://opensource.org/licenses/MIT). Consulte o arquivo `LICENSE` para mais detalhes.
