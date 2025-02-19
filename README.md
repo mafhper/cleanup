@@ -1,109 +1,126 @@
-# Script de Manutenção do Sistema Ubuntu (cleanup.sh)
+# 🚀 Ubuntu System Maintenance Script
 
-[![Licença MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+<p align="center">
+  <img src="https://img.shields.io/badge/Shell-Bash-4EAA25?style=for-the-badge&logo=gnu-bash&logoColor=white" />
+  <img src="https://img.shields.io/badge/OS-Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white" />
+  <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" />
+</p>
 
-Este script Bash abrangente foi projetado para simplificar a manutenção e limpeza de sistemas Ubuntu, oferecendo uma interface interativa e funcionalidades robustas para manter seu sistema otimizado.
+Um script de manutenção interativo para sistemas Ubuntu com interface amigável e feedback visual em tempo real.
 
-## Funcionalidades Principais
+```
+    ████████╗██╗   ██╗██████╗ ██╗   ██╗███╗   ██╗████████╗██╗   ██╗
+    ╚══██╔══╝██║   ██║██╔══██╗██║   ██║████╗  ██║╚══██╔══╝██║   ██║
+       ██║   ██║   ██║██████╔╝██║   ██║██╔██╗ ██║   ██║   ██║   ██║
+       ██║   ██║   ██║██╔══██╗██║   ██║██║╚██╗██║   ██║   ██║   ██║
+       ██║   ╚██████╔╝██████╔╝╚██████╔╝██║ ╚████║   ██║   ╚██████╔╝
+       ╚═╝    ╚═════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝   ╚═╝    ╚═════╝ 
+```
 
-* **Menu Interativo Agrupado:** Navegue facilmente pelas opções de manutenção através de um menu interativo e organizado por categorias.
-* **Saída Verbosa e Colorida:** Receba feedback detalhado sobre cada etapa da manutenção com mensagens coloridas para melhor visualização e acompanhamento.
-* **Resumo Detalhado da Execução:** Ao final da manutenção, visualize um resumo conciso no terminal, incluindo:
-    * Período de execução do script.
-    * Métricas de espaço liberado e pacotes baixados (quando aplicável).
-    * Lista de tarefas de manutenção executadas.
-    * Referência ao arquivo de log para detalhes completos.
-* **Métricas de Limpeza:** Acompanhe o espaço em disco liberado pelas tarefas de limpeza e o volume de dados baixados durante as atualizações do sistema.
-* **Limpeza Abrangente:** Inclui as seguintes tarefas de manutenção:
-    * Atualização de pacotes do sistema (`apt update` e `apt upgrade`).
-    * Limpeza do APT (`autoremove`, `autoclean`, `clean`).
-    * Limpeza de arquivos temporários em `/tmp` e `/var/tmp` (configurável por idade).
-    * Limpeza de logs antigos em `/var/log` (configurável por idade).
-    * Limpeza de cache de navegadores (Firefox, Chrome/Chromium) - opcional e configurável.
-    * Limpeza de cache de miniaturas (`~/.cache/thumbnails`).
-    * Verificação do espaço em disco (`df -h`).
-* **Arquivo de Log Detalhado:** Todas as ações e saídas do script são registradas em `/var/log/manutencao_ubuntu.log` para auditoria e referência futura.
-* **Configurações Personalizáveis:** Ajuste variáveis no início do script para personalizar o comportamento, como:
-    * Dias limite para arquivos temporários e logs.
-    * Habilitar/desabilitar limpeza de cache de navegadores.
+## 📋 Características
 
-## Como Usar
+- ⚡ Atualização do sistema
+- 🧹 Limpeza de cache e arquivos temporários
+- 📊 Verificação do estado do sistema
+- 🎨 Interface colorida e intuitiva
+- 📈 Barra de progresso em tempo real
+- 📝 Sistema de logs detalhado
 
-1.  **Baixe o script:**
-    Você pode baixar o script `cleanup.sh` diretamente do seu repositório GitHub ou usando `wget`:
+## 🛠️ Funcionalidades
 
-    \`\`\`bash
-    wget [URL_DIRETO_PARA_O_ARQUIVO_CLEANUP.SH] -O cleanup.sh
-    \`\`\`
+1. **Atualização do Sistema**
+   - Atualização da lista de pacotes
+   - Instalação de atualizações disponíveis
+   - Remoção de pacotes desnecessários
 
-    *(Substitua `[URL_DIRETO_PARA_O_ARQUIVO_CLEANUP.SH]` pelo link direto para o arquivo `cleanup.sh` no seu repositório GitHub)*
+2. **Limpeza do Sistema**
+   - Limpeza de cache do APT
+   - Remoção de arquivos temporários
+   - Limpeza de logs antigos
+   - Otimização do cache do sistema
 
-2.  **Torne o script executável:**
-    Dê permissão de execução para o script:
+3. **Verificação do Sistema**
+   - Análise do uso do disco
+   - Monitoramento da memória
+   - Listagem dos processos mais pesados
 
-    \`\`\`bash
-    chmod +x cleanup.sh
-    \`\`\`
+## 📥 Instalação
 
-3.  **Execute o script como root:**
-    O script requer privilégios de root para executar todas as tarefas de manutenção. Execute-o com `sudo`:
+1. Clone o repositório:
+```bash
+git clone https://github.com/mafhper/cleanup.git
+```
 
-    \`\`\`bash
-    sudo ./cleanup.sh
-    \`\`\`
+2. Entre no diretório:
+```bash
+cd cleanup
+```
 
-    Ou, se você moveu o script para um diretório em seu PATH, como `/usr/local/bin`:
+3. Dê permissão de execução ao script:
+```bash
+chmod +x cleanup.sh
+```
 
-    \`\`\`bash
-    sudo cleanup.sh
-    \`\`\`
+## 💻 Uso
 
-4.  **Siga o menu interativo:**
-    O script exibirá um menu no terminal. Selecione as opções de manutenção desejadas digitando os números correspondentes separados por espaços e pressione `Enter`. Para executar todas as tarefas, selecione a opção `5`. Para sair sem executar nenhuma manutenção, selecione `0`.
+Execute o script com privilégios de superusuário:
 
-5.  **Analise o Resumo:**
-    Após a execução, um resumo das tarefas realizadas, métricas e período de execução será exibido no terminal.
+```bash
+sudo ./cleanup.sh
+```
 
-6.  **Consulte o Log Detalhado:**
-    Para um registro completo de todas as ações, verifique o arquivo de log em `/var/log/manutencao_ubuntu.log`.
+## 🔧 Configurações
 
-## Configuração
+O script possui algumas configurações padrão que podem ser ajustadas:
 
-As seguintes variáveis podem ser configuradas no início do script para personalizar seu comportamento:
+| Configuração | Valor Padrão | Descrição |
+|-------------|--------------|-----------|
+| TEMP_THRESHOLD_DAYS | 3 | Dias para manter arquivos temporários |
+| CACHE_THRESHOLD_DAYS | 7 | Dias para manter arquivos em cache |
+| LOG_THRESHOLD_DAYS | 30 | Dias para manter logs antigos |
 
-* `LOG_FILE="/var/log/manutencao_ubuntu.log"`:  Define o caminho e nome do arquivo de log.
-* `TEMP_THRESHOLD_DAYS=3`: Define o número de dias de idade para arquivos temporários em `/tmp` e `/var/tmp` serem considerados para limpeza.
-* `CACHE_THRESHOLD_DAYS=7`:  *(Atualmente não utilizado diretamente, mas pode ser usado para futuras implementações de limpeza de cache baseada em idade)*
-* `LOG_THRESHOLD_DAYS=30`: Define o número de dias de idade para arquivos de log em `/var/log` serem considerados para limpeza.
-* `CACHE_NAVEGADOR=true`:  Define se a limpeza de cache dos navegadores (Firefox e Chrome/Chromium) deve ser habilitada por padrão (`true`) ou desabilitada (`false`).
+## 📊 Logs
 
-## Métricas e Resumo
+Os logs são armazenados em:
+```
+/var/log/manutencao_ubuntu.log
+```
 
-O script fornece um resumo ao final da execução, exibindo:
+## 🤝 Contribuindo
 
-* **Período de Execução:** Tempo total que o script levou para ser executado.
-* **Métricas de Manutenção:**
-    * Pacotes Atualizados/Baixados: Quantidade de dados baixados durante a atualização de pacotes (em MB).
-    * Espaço Total Liberado: Espaço total em disco liberado pelas tarefas de limpeza (em MB).
-* **Tarefas Executadas:** Lista das tarefas de manutenção que foram selecionadas e executadas.
-* **Status do Disco:**  Um lembrete para verificar o arquivo de log para detalhes completos sobre o status do disco (saída do comando `df -h`).
+Contribuições são bem-vindas! Sinta-se à vontade para:
 
-## Arquivo de Log
+1. Reportar bugs
+2. Sugerir novas funcionalidades
+3. Enviar pull requests
 
-Um log detalhado de todas as operações é gravado em `/var/log/manutencao_ubuntu.log`. Este arquivo contém timestamps, mensagens informativas, erros (se ocorrerem) e a saída completa de comandos como `apt update`, `apt upgrade` e `df -h`.
+## 📝 Licença
 
-## Dependências
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-* **Bash:** O script é escrito em Bash e requer um interpretador Bash para ser executado.
-* **Ubuntu ou sistemas baseados em Debian:**  O script foi desenvolvido e testado em sistemas Ubuntu. Pode funcionar em outras distribuições baseadas em Debian, mas a compatibilidade total não é garantida. Depende de utilitários padrão como `apt`, `find`, `rm`, `df`, `du`, `grep`, `awk`, `sed`, e `bc`.
-* **Privilégios de Root:**  É necessário executar o script com `sudo` pois muitas tarefas de manutenção exigem privilégios administrativos.
+## 👤 Autor
 
-## Avisos Importantes
+**mafhper**
 
-* **Execute com cautela:**  Este script executa comandos que podem modificar seu sistema. **Revise o código cuidadosamente** antes de executar e certifique-se de entender o que cada tarefa faz.
-* **Backup Recomendado:**  É sempre recomendável fazer backup de dados importantes antes de executar scripts de manutenção do sistema, especialmente em ambientes de produção.
-* **Responsabilidade:** O uso deste script é por sua conta e risco. O autor não se responsabiliza por quaisquer problemas que possam ocorrer devido ao uso incorreto ou falhas no script.
+* GitHub: [@mafhper](https://github.com/mafhper)
 
-## Licença
+## ⭐ Mostre seu apoio
 
-Este script é distribuído sob a [Licença MIT](https://opensource.org/licenses/MIT). Consulte o arquivo `LICENSE` para mais detalhes.
+Dê uma ⭐️ se este projeto te ajudou!
+
+## 📜 Changelog
+
+### [2.2.0] - 2025-02-19
+- Interface gráfica melhorada com ASCII art
+- Adicionado feedback visual em tempo real
+- Implementado sistema de logs detalhado
+- Melhorias na performance e segurança
+
+### [2.1.0] - 2025-02-19
+- Adicionada barra de progresso
+- Melhorias na interface do usuário
+- Correções de bugs
+
+### [2.0.0] - 2025-02-19
+- Versão inicial do script
+- Funcionalidades básicas de manutenção
